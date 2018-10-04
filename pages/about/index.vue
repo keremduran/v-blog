@@ -1,26 +1,31 @@
 <template>
-  	<section id="about-page">
-		<h1>{{ title }}</h1><br>
-		<p>{{ content }}</p>
+  	<section id="about-page" v-editable="blok">
+		<h1 v-html="title"></h1><br>
+		<p v-html="content"></p>
 	</section>
 </template>
 
 <script>
 export default {
   	asyncData(context) {
-		  return context.app.$storyapi.get('cdn/stories/about', {
-			  version: 'draft'
-		  })
-		  .then(res => {
-			  console.log(res);
-			  
-			  return {
-				  title: res.data.story.content.title,
-				  content: res.data.story.content.content
-			  }
-		  })
-	  }
-	};
+		return context.app.$storyapi.get('cdn/stories/about', {
+			version: 'draft'
+		})
+		.then(res => {
+			return { 
+				blok: res.data.story.content,
+				title: res.data.story.content.title,
+				content: res.data.story.content.content
+			};
+		});
+	},
+	mounted() {
+		this.$storyblok.init();
+		this.$storyblok.on('change', () => {
+			location.reload(true);
+		})
+	}
+}
 </script>
 
 <style scoped>
@@ -33,5 +38,6 @@ export default {
 	#about-page p {
 		white-space: pre-line;
 	}
+
 </style>
 

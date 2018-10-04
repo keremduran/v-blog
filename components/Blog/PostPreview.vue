@@ -1,6 +1,6 @@
 <template>
     <nuxt-link
-        :to="id">
+        :to="'posts/'+id">
         <article class="post-preview">
             <div
                 class="post-preview-thumbnail"

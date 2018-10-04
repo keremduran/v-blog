@@ -1,19 +1,15 @@
 <template>
-	<div id="post">
+	<div id="post" v-editable="blok">
 		<div
 			class="post-thumbnail"
 			:style="{backgroundImage: 'url(' + thumbnailUrl + ')'}">
 		</div>
 		<div class="post-content">
 			<div class="post-title">
-				<h1>
-					{{ title }}
-				</h1>
+				<h1 v-html="title"></h1>
 			</div>
 			<div class="post-entry">
-				<p>
-					{{ entry }}
-				</p>
+				<p v-html="entry"></p>
 			</div>
 		</div>
 	</div>
@@ -22,16 +18,23 @@
 <script>
 export default {
 	asyncData(context) {
-		return context.app.$storyapi.get('cdn/stories/blog/' + context.params.postId, {
+		return context.app.$storyapi.get('cdn/stories/posts/' + context.params.postId, {
 			version: 'draft'
 		}).then(res => {
 			console.log(res.data);
 			return {
+				blok: res.data.story.content,
 				thumbnailUrl: res.data.story.content.thumbnail,
 				title: res.data.story.content.title,
 				entry: res.data.story.content.entry
 			};
 		})
+	},
+	mounted() {
+		this.$storyblok.init();
+		this.$storyblok.on("change", () => {
+			location.reload(true);
+		});
 	}
 }
 </script>
@@ -39,9 +42,9 @@ export default {
 <style scoped>
 	.post-thumbnail {
 		display: block;
-		height: 300px;
-		background-size: cover;
 		background-position: center;
+		background-size: cover;
+		height: 300px;
 	}
 
 	.post-content {

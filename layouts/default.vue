@@ -30,5 +30,17 @@ body {
 .main-content {
 	margin-top: 4.5rem;
 }
+
+.text-primary {
+	color: red;
+}
+
+.text-secondary {
+	color: blue;
+}
+
+.primary {
+	background-color: red;
+}
 </style>
 
