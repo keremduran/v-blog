@@ -1,3 +1,4 @@
+<!--
 <template>
     <header class="main-header">
         <nav class="main-nav">
@@ -9,54 +10,110 @@
         </nav>
     </header>
 </template>
+-->
 
-<style scoped>
-    .main-header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        background-color: #022d30;
-        height: 4.5rem;
-    }
+<template>
+    <header class="main-header mt-1">
+        <!-- Side Nav -->
+        <v-navigation-drawer
+            class="main-nav"
+            absolute temporary
+            v-model="sideNav">
+            <v-list
+                class="nav-links"
+                tag="ul">
+                <v-list-tile
+                    v-for="item in menuItems"
+                    :key="item.title"
+                    :to="item.link"
+                    tag="li"
+                    class="nav-link">
+                    <v-list-tile-action>
+                        <v-icon>
+                            {{ item.icon }}
+                        </v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                        {{ item.title }}
+                    </v-list-tile-content>    
+                </v-list-tile>
+            </v-list>
+        </v-navigation-drawer>
+        <!-- Toolbar -->
+        <v-toolbar class="toolbar-nav">             
+            <v-toolbar-side-icon
+                class="hidden-sm-and-up"
+                @click.stop="sideNav = !sideNav">
+            </v-toolbar-side-icon> 
+            <v-toolbar-title class="px-2 mx-3">
+                <nuxt-link 
+                    to="/"
+                    tag="span" style="curl"
+                    :style="{cursor: 'pointer'}">
+                    <i>DIY</i>
+                </nuxt-link>
+            </v-toolbar-title>                         
+            <v-spacer></v-spacer>        
+            <v-toolbar-items
+                tag="ul"
+                class="toolbar-nav-links hidden-xs-only">
+                <v-btn
+                    tag="li" class="toolbar-nav-link text-capitalize"                            
+                    nuxt
+                    v-for="item in menuItems"
+                    :key="item.title" 
+                    :to="item.link"
+                    flat
+                    >
+                    <v-icon dark left>{{ item.icon }}</v-icon>
+                    {{ item.title }}
+                </v-btn>              
+            </v-toolbar-items>
+        </v-toolbar>
+    </header>
+</template>
 
-    .main-nav {
-        height: 100%;
-    }
 
-    .nav-links {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-    }
 
-    .nav-link {
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0 1rem;
-        padding: .3rem;
-    }
+<script>
+export default {
+    data() {
+        return {
+            sideNav: false
+        };
+    },
+    computed: {
+        menuItems() {
+            let menuItems = [
+                { 
+                    icon: "home", 
+					title: "Home",
+                    link: "/"
+                },
+                { 
+                    icon: "layers", 
+					title: "Posts",
+                    link: "/posts" 
+                },
+                { 
+                    icon: "question_answer", 
+					title: "About",
+                    link: "/about"
+                }
+            ];
+            return menuItems;
+        },
+    },
+};
+</script>
 
-    .nav-link.nuxt-link-exact-active {
-        border-bottom: 3px solid #06c4d1;
-    }
-
-    .nav-link a {
-        display: block;
-        text-decoration: none;
-        color: white;
-    }
-
-    .nav-link a:hover,
-    .nav-link a:active,
-    .nav-link.nuxt-link-exact-active a {
-        color: #06c4d1;
+<style>
+    .main-header .v-list__tile--active {
+        background-color: rgba(128, 128, 128, 0.122);
     }
 </style>
+
+
+
+
 

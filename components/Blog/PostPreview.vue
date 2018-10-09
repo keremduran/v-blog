@@ -8,10 +8,10 @@
             </div>
             <div class="post-preview-content">
                 <div class="post-preview-title">
-                    <h1>{{ title }}</h1>
+                    <h1 v-html="title"></h1>
                 </div>
                 <div class="post-preview-summary">
-                    <p>{{ summary }}</p>
+                    <p v-html="summary"></p>
                 </div>
             </div>
         </article>
@@ -52,7 +52,7 @@ a {
     box-shadow: 1px 1px 5px 1px rgba(0,0,0, 0.5);
     width: 20rem;
     margin: 1rem;
-    height: 26rem;
+    height: 27rem;
     overflow: hidden;
 }
 
@@ -60,19 +60,26 @@ a {
     background-position: center;
     background-size: cover;
     width: 100%;
-    height: 66%;
+    height: 15rem;
 }
 
 .post-preview-content {
     text-align: center;
-    padding: 1rem;
+    padding: 0 1rem;
+    height: 12rem;
 }
 
 .post-preview-title {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 4rem;
+    height: 6rem;
+}
+
+.post-preview-summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 </style>

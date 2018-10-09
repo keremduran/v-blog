@@ -17,18 +17,28 @@
 
 <script>
 export default {
-	asyncData(context) {
-		return context.app.$storyapi.get('cdn/stories/posts/' + context.params.postId, {
-			version: 'draft'
-		}).then(res => {
-			console.log(res.data);
-			return {
-				blok: res.data.story.content,
-				thumbnailUrl: res.data.story.content.thumbnail,
-				title: res.data.story.content.title,
-				entry: res.data.story.content.entry
-			};
-		})
+	// asyncData(context) {
+	// 	return context.app.$storyapi.get('cdn/stories/posts/' + context.params.postId, {
+	// 		version: process.env.NODE_ENV == 'production' ? 'published' : 'draft'
+	// 	}).then(res => {
+	// 		return {
+	// 			blok: res.data.story.content,
+	// 			thumbnailUrl: res.data.story.content.thumbnail,
+	// 			title: res.data.story.content.title,
+	// 			entry: res.data.story.content.entry
+	// 		};
+	// 	})
+	// },
+	async asyncData(context) {
+		const res = await context.app.$storyapi.get('cdn/stories/posts/' + context.params.postId, {
+	 		version: process.env.NODE_ENV == 'production' ? 'published' : 'draft'
+		});
+		return {
+			blok: res.data.story.content,
+			thumbnailUrl: res.data.story.content.thumbnail,
+			title: res.data.story.content.title,
+			entry: res.data.story.content.entry			 
+		};
 	},
 	mounted() {
 		this.$storyblok.init();
@@ -49,8 +59,12 @@ export default {
 
 	.post-content {
 		width: 80%;
-		max-width: 500px;
+		max-width: 70rem;
 		margin: auto;
+	}
+
+	.post-title {
+		margin: 2rem 0;
 	}
 
 	.post-entry p {
