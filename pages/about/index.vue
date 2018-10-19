@@ -12,7 +12,6 @@ export default {
 			version: process.env.NODE_ENV == 'production' ? 'published' : 'draft'
 		})
 		.then(res => {
-			console.log(res);
 			return { 
 				blok: res.data.story.content,
 				title: res.data.story.content.title,
