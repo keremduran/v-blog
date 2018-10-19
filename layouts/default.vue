@@ -24,7 +24,7 @@ export default {
 	}
 
 	html {
-		font-size: 100%;
+		font-size: 16px;
 	}
 
 	body {
@@ -106,11 +106,7 @@ export default {
 
 	@media only screen and (max-width: 550px) {
 		html {
-			font-size: 55%;
-		}
-
-		p {
-			font-size: 1.4rem;
+			font-size: 70%;
 		}
 	}
 </style>

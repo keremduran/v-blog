@@ -25,7 +25,7 @@ module.exports = {
 	*/
 	loading: { 
 		color: 'black',
-		height: '5px'
+		height: '1.3px'
 	 },
 
 	/*
@@ -58,19 +58,15 @@ module.exports = {
 	** Axios module configuration
 	*/
 
-	router: {
-		base: '/vblog/'
-	},
-
 	generate: {
 		routes: function () {
 			return axios.get('https://api.storyblok.com/v1/cdn/stories?version=published&token=grimBw3Eo4zNojpYXtQY6Att&cv=' + Math.floor(Date.now / 1e3))
 			.then(res => {
 				const blogPosts = res.data.stories.map(bp => bp.full_slug);
+				console.log(blogPosts);				
 				return [
-					'/',
-					'/posts',
-					'/about',
+					'posts',
+					'about',
 					...blogPosts
 				]
 			});

@@ -50,9 +50,9 @@ a {
 .post-preview {  
     border-radius: 3px;
     box-shadow: 1px 1px 5px 1px rgba(0,0,0, 0.5);
-    width: 20rem;
+    width: 23rem;
     margin: 1rem;
-    height: 27rem;
+    height: 26rem;
     overflow: hidden;
 }
 
@@ -66,7 +66,6 @@ a {
 .post-preview-content {
     text-align: center;
     padding: 0 1rem;
-    height: 12rem;
 }
 
 .post-preview-title {

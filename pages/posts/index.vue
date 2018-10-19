@@ -1,13 +1,17 @@
 <template>
-	<section id="posts">
-		<PostPreview
-			v-for="post in posts"
-			:key="post.id"
-			:title="post.title"
-			:summary="post.summary"
-			:thumbnailUrl="post.thumbnailUrl"
-			:id="post.id">
-		</PostPreview>
+	<section id="posts-page" v-editable="page.blok">
+		<h1 v-html="page.title"></h1><br>
+		<p v-html="page.content"></p>
+		<div id="posts">
+			<PostPreview
+				v-for="post in posts"
+				:key="post.id"
+				:title="post.title"
+				:summary="post.summary"
+				:thumbnailUrl="post.thumbnailUrl"
+				:id="post.id">
+			</PostPreview>
+		</div>
 	</section>
 </template>
 
@@ -17,29 +21,59 @@ export default {
 	components: {
 		PostPreview
 	},
-	asyncData(context) {
-		return context.app.$storyapi
-		.get('cdn/stories', {
-			version: process.env.NODE_ENV == 'production' ? 'published' : 'draft',
-			starts_with: 'posts/'
+	async asyncData (context) {
+		let posts = [];
+		let page;
+		let res;
+
+		try {
+			res = await context.app.$storyapi.get('cdn/stories', {
+				version: process.env.NODE_ENV == 'production' ? 'published' : 'draft',
+				starts_with: 'posts/'
+			});
+		} catch (err) {
+			console.log(err);
+		}
+
+		//Separating posts from the page
+		res.data.stories.map(story => {
+			if(story.content.component === "post") {
+				posts.push({
+					id: story.slug,
+					title: story.content.title,
+					summary: story.content.summary,
+					thumbnailUrl: story.content.thumbnail
+				});
+			} else if (story.is_startpage) {
+				page = {
+					blok: story.content,
+					id: story.slug,
+					title: story.content.title,
+					content: story.content.content
+				};			
+			}
 		})
-		.then(res => {	
-			return {
-				posts: res.data.stories.map(bp => {
-					return {
-						id: bp.slug,
-						title: bp.content.title,
-						summary: bp.content.summary,
-						thumbnailUrl: bp.content.thumbnail
-					};
-				})
-			};
-		});
+
+		return {
+			posts,
+			page
+		}
 	},
+	
+	mounted() {
+		this.$storyblok.init();
+		this.$storyblok.on('change', () => {
+			location.reload(true);
+		})
+	}
 }
 </script>
 
 <style scoped>
+	#posts-page {
+		text-align: center;
+	}
+	
 	#posts {
 		padding: 1rem;
 		display: flex;
