@@ -31,28 +31,32 @@ export default {
 		font-family: "Lato", sans-serif;
 	}
 
+	a {
+		text-decoration: none;
+	}
+
 	.main-content {
 		margin-top: 4.5rem;
 	}
 
-	.text--accent-1 {
+	.text-color-1 {
 		color: #5D5C61;
 	}
 
-	.text--accent-2 {
+	.text-color-2 {
 		color: #557A95;
 	}
 
-	.text--accent-3 {
+	.text-color-3 {
 		color: #7395AE;
 	}
 
-	.text--error {
-		color: #8a1014;
+	.text-color-error {
+		color: #b41a1f;
 	}
 
-	.text--error-1 {
-		color: #2E1114;
+	.text-color-error-1 {
+		color: #8d1a26;
 	}
 
 	.mt-0 {
@@ -79,12 +83,27 @@ export default {
 		padding-top: 1rem;
 	}
 
-	.entry-img-frame {
-		display: inline-block;
+	.img-frame {
+		float: left;
+		max-height: 25rem;
+		max-width: 25rem;
+		padding: 0;
+		margin: .35rem;
+		margin-left: 0;
+	}
+
+	.float-right {
+		float: right;
+	}
+
+	.img-frame.small {
+		max-height: 15rem;
+		max-width: 15rem;
+	}
+
+	.img-frame.large {
 		max-height: 35rem;
 		max-width: 35rem;
-		padding: 1rem 1rem 1rem 0;
-		float: left;
 	}
 
 	img {

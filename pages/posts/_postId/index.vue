@@ -6,10 +6,10 @@
 		</div>
 		<div class="post-content">
 			<div class="post-title">
-				<h1 v-html="title"></h1>
+				<h1 v-html="$md.render(title)"></h1>
 			</div>
 			<div class="post-entry">
-				<p v-html="entry"></p>
+				<p v-html="$md.render(entry)"></p>
 			</div>
 		</div>
 	</div>

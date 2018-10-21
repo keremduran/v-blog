@@ -46,6 +46,7 @@ module.exports = {
 	** Nuxt.js modules
 	*/
 	modules: [
+		'@nuxtjs/markdownit',
 		// Doc: https://github.com/nuxt-community/axios-module#usage
 		'@nuxtjs/axios',
 		['storyblok-nuxt', {
@@ -57,6 +58,17 @@ module.exports = {
 	/*
 	** Axios module configuration
 	*/
+
+	// [optional] markdownit options
+	// See https://github.com/markdown-it/markdown-it
+	markdownit: {
+		preset: 'default',
+		linkify: true,
+		breaks: true,
+		injected: true,
+		html: true,
+		typographer: true
+	},
 
 	generate: {
 		routes: function () {

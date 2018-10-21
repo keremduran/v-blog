@@ -1,7 +1,7 @@
 <template>
   	<section id="home" v-editable="blok">
 		<h1 v-html="title"></h1><br>
-		<p v-html="content"></p>
+		<p class="content" v-html="$md.render(content)"></p>
 	</section>
 </template>
 
@@ -36,8 +36,14 @@ export default {
 
 
 <style scoped>
-    #home {
-        text-align: center;
+	#home {
+		text-align: center;
+	}
+	
+    .content {
+        text-align: left;
+		padding: 0 1rem;
     }
+
 </style>
 
