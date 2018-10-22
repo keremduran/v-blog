@@ -1,9 +1,10 @@
 <template>
 	<div id="post" v-editable="blok">
-		<div
+		<!-- <div
 			class="post-thumbnail"
 			:style="{backgroundImage: 'url(' + thumbnailUrl + ')'}">
-		</div>
+		</div> -->
+		<v-parallax class="mb-4" height="300" :src="thumbnailUrl"></v-parallax>	
 		<div class="post-content">
 			<div class="post-title">
 				<h1 v-html="$md.render(title)"></h1>
@@ -17,29 +18,29 @@
 
 <script>
 export default {
-	// asyncData(context) {
-	// 	return context.app.$storyapi.get('cdn/stories/posts/' + context.params.postId, {
-	// 		version: process.env.NODE_ENV == 'production' ? 'published' : 'draft'
-	// 	}).then(res => {
-	// 		return {
-	// 			blok: res.data.story.content,
-	// 			thumbnailUrl: res.data.story.content.thumbnail,
-	// 			title: res.data.story.content.title,
-	// 			entry: res.data.story.content.entry
-	// 		};
-	// 	})
-	// },
-	async asyncData(context) {
-		const res = await context.app.$storyapi.get('cdn/stories/posts/' + context.params.postId, {
-	 		version: process.env.NODE_ENV == 'production' ? 'published' : 'draft'
-		});
-		return {
-			blok: res.data.story.content,
-			thumbnailUrl: res.data.story.content.thumbnail,
-			title: res.data.story.content.title,
-			entry: res.data.story.content.entry			 
-		};
+	asyncData(context) {
+		return context.app.$storyapi.get('cdn/stories/posts/' + context.params.postId, {
+			version: process.env.NODE_ENV == 'production' ? 'published' : 'draft'
+		}).then(res => {
+			return {
+				blok: res.data.story.content,
+				thumbnailUrl: res.data.story.content.thumbnail,
+				title: res.data.story.content.title,
+				entry: res.data.story.content.entry
+			};
+		})
 	},
+	// async asyncData(context) {
+	// 	const res = await context.app.$storyapi.get('cdn/stories/posts/' + context.params.postId, {
+	//  		version: process.env.NODE_ENV == 'production' ? 'published' : 'draft'
+	// 	});
+	// 	return {
+	// 		blok: res.data.story.content,
+	// 		thumbnailUrl: res.data.story.content.thumbnail,
+	// 		title: res.data.story.content.title,
+	// 		entry: res.data.story.content.entry			 
+	// 	};
+	// },
 	mounted() {
 		this.$storyblok.init();
 		this.$storyblok.on("change", () => {

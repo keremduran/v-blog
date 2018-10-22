@@ -1,5 +1,5 @@
 <template>
-  	<section id="about-page" v-editable="blok">
+  	<section id="about-page" v-editable="blok">  
 		<h1 v-html="title"></h1><br>
 		<p v-html="content"></p>
 	</section>

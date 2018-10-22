@@ -24,7 +24,7 @@ export default {
 	}
 
 	html {
-		font-size: 16px;
+		font-size: 12px;
 	}
 
 	body {
@@ -39,23 +39,23 @@ export default {
 		margin-top: 4.5rem;
 	}
 
-	.text-color-1 {
-		color: #5D5C61;
+	.color-1 {
+		color: rgb(85, 101, 149);
 	}
 
-	.text-color-2 {
+	.color-2 {
 		color: #557A95;
 	}
 
-	.text-color-3 {
+	.color-3 {
 		color: #7395AE;
 	}
 
-	.text-color-error {
-		color: #b41a1f;
+	.color-error {
+		color: red;
 	}
 
-	.text-color-error-1 {
+	.color-error-1 {
 		color: #8d1a26;
 	}
 
@@ -88,12 +88,14 @@ export default {
 		max-height: 25rem;
 		max-width: 25rem;
 		padding: 0;
-		margin: .35rem;
-		margin-left: 0;
+		padding-right: 1.2rem;
+		margin: .35rem 0;
 	}
 
 	.float-right {
 		float: right;
+		padding-right: 0;
+		padding-left: 1.2rem;
 	}
 
 	.img-frame.small {
@@ -106,26 +108,21 @@ export default {
 		max-width: 35rem;
 	}
 
-	img {
-		width: 100%;
-		height: 100%;
-	}
-
-	@media only screen and (max-width: 1000px) {
+	@media only screen and (min-width: 550px) {
 		html {
-			font-size: 90%;
+			font-size: 13px;
 		}
 	}
 
-	@media only screen and (max-width: 800px) {
+	@media only screen and (min-width: 800px) {
 		html {
-			font-size: 80%;
+			font-size: 14px;
 		}
 	}
 
-	@media only screen and (max-width: 550px) {
+	@media only screen and (min-width: 1000px) {
 		html {
-			font-size: 70%;
+			font-size: 16px;
 		}
 	}
 </style>
