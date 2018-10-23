@@ -24,7 +24,7 @@ module.exports = {
 	** Customize the progress-bar color
 	*/
 	loading: { 
-		color: 'black',
+		color: '#33337F',
 		height: '1.3px'
 	 },
 
@@ -46,14 +46,14 @@ module.exports = {
 	** Nuxt.js modules
 	*/
 	modules: [
-		'@nuxtjs/markdownit',
 		// Doc: https://github.com/nuxt-community/axios-module#usage
 		'@nuxtjs/axios',
 		['storyblok-nuxt', {
 			accessToken: process.env.NODE_ENV == 'production' ? 
 				'grimBw3Eo4zNojpYXtQY6Att' : 
 				'by1P1Vq5zbTYAdiynhEaowtt',
-			cacheProvider: 'memory'}] 
+			cacheProvider: 'memory'}],
+		'@nuxtjs/markdownit',
 	],
 	/*
 	** Axios module configuration
@@ -67,7 +67,7 @@ module.exports = {
 		breaks: true,
 		injected: true,
 		html: true,
-		typographer: true
+		typographer: true,
 	},
 
 	generate: {
