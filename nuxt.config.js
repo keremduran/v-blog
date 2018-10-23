@@ -1,5 +1,6 @@
 const pkg = require('./package');
 const axios = require ('axios');
+
 module.exports = {
 	mode: 'universal',
 
@@ -101,6 +102,18 @@ module.exports = {
 		/*
 		** You can extend webpack config here
 		*/
+		transpile: [/^vuetify/],
+		babel: {
+		  plugins: [
+			['transform-imports', {
+			  'vuetify': {
+				'transform': 'vuetify/es5/components/${member}',
+				'preventFullImport': true
+			  }
+			}]
+		  ]
+		},
+		extractCSS: true,
 		extend(config, ctx) {
 		// Run ESLint on save
 		// if (ctx.isDev && ctx.isClient) {
@@ -111,6 +124,13 @@ module.exports = {
 		//     exclude: /(node_modules)/
 		//   })
 		// }
+			if (process.server) {
+				config.externals = [
+					nodeExternals({
+						whitelist: [/^vuetify/]
+					})
+				]
+			}
 		}
 	}
 }
