@@ -68,6 +68,8 @@ typings/
 # nuxt.js build output
 .nuxt
 
+# backup dist from generate
+/vblog
 
 # vuepress build output
 .vuepress/dist

@@ -78,13 +78,11 @@ module.exports = {
 				const blogPosts = res.data.stories.map(bp => {
 					if(bp.full_slug === "home"){
 						return '/';
+						return "/";
 					}
 					return bp.full_slug;
-				});
-				console.log(blogPosts);				
+				});				
 				return [
-					'posts',
-					'about',
 					...blogPosts
 				]
 			});
